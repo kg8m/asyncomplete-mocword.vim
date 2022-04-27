@@ -1,17 +1,17 @@
-augroup asyncomplete#sources#nextword#augroup
+augroup asyncomplete#sources#mocword#augroup
     autocmd!
-    autocmd VimLeave * call s:stop_nextword()
+    autocmd VimLeave * call s:stop_mocword()
 augroup END
 
-function! asyncomplete#sources#nextword#get_source_options(opt) abort
+function! asyncomplete#sources#mocword#get_source_options(opt) abort
     if !exists('a:opt["args"]')
-        let a:opt['args'] = ['-n', '10000']
+        let a:opt['args'] = ['--limit', '100']
     endif
 
-    if !exists('s:nextword_job')
-        let s:nextword_job = async#job#start(['nextword'] + a:opt['args'], {'on_stdout': function('s:on_event')})
-        if s:nextword_job <= 0
-            echoerr "nextword launch failed"
+    if !exists('s:mocword_job')
+        let s:mocword_job = async#job#start(['mocword'] + a:opt['args'], {'on_stdout': function('s:on_event')})
+        if s:mocword_job <= 0
+            echoerr "mocword launch failed"
         endif
         let s:ctx = {}
     endif
@@ -19,15 +19,15 @@ function! asyncomplete#sources#nextword#get_source_options(opt) abort
     return a:opt
 endfunction
 
-function! asyncomplete#sources#nextword#completor(opt, ctx) abort
-    if s:nextword_job <= 0
+function! asyncomplete#sources#mocword#completor(opt, ctx) abort
+    if s:mocword_job <= 0
         return
     endif
 
     let l:typed = s:get_typed_string(a:ctx)
     let s:ctx = a:ctx
     let s:opt = a:opt
-    call async#job#send(s:nextword_job, l:typed . "\n")
+    call async#job#send(s:mocword_job, l:typed . "\n")
 endfunction
 
 function! s:get_typed_string(ctx)
@@ -54,12 +54,12 @@ function! s:on_event(job_id, data, event)
 endfunction
 
 function! s:generate_items(candidates)
-    return map(a:candidates, '{"word": v:val, "menu": "[nextword]"}')
+    return map(a:candidates, '{"word": v:val, "menu": "[mocword]"}')
 endfunction
 
-function! s:stop_nextword()
-    if exists('s:nextword_job') && s:nextword_job > 0
-        call async#job#stop(s:nextword_job)
+function! s:stop_mocword()
+    if exists('s:mocword_job') && s:mocword_job > 0
+        call async#job#stop(s:mocword_job)
     endif
 endfunction
 

@@ -1,40 +1,30 @@
-# asyncomplete-nextword.vim
-Provides intelligent English autocomplete for asyncomplete.vim via nextword.
+# asyncomplete-mocword.vim
+Provides intelligent English autocomplete for asyncomplete.vim via mocword.
 
 ## Screenshot
 
-![screenshot.gif](images/screenshot.gif)
+FIXME
 
 ## Installing
 
 ```
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/async.vim'
-Plug 'high-moctane/asyncomplete-nextword.vim'
+Plug 'kg8m/asyncomplete-mocword.vim'
 ```
 
-You also need to install [Nextword](https://github.com/high-moctane/nextword) and
-[Nextword-data](https://github.com/high-moctane/nextword-data).
+You also need to install [Mocword](https://github.com/high-moctane/mocword) and
+[Mocword-data](https://github.com/high-moctane/mocword-data).
 
 ### Registration
 
 ```vim
-call asyncomplete#register_source(asyncomplete#sources#nextword#get_source_options({
-            \   'name': 'nextword',
+call asyncomplete#register_source(asyncomplete#sources#mocword#get_source_options({
+            \   'name': 'mocword',
             \   'allowlist': ['*'],
-            \   'args': ['-n', '10000'],
-            \   'completor': function('asyncomplete#sources#nextword#completor')
+            \   'args': ['-l', '100'],
+            \   'completor': function('asyncomplete#sources#mocword#completor')
             \   }))
 ```
 
-Note: `args` is optional. it will be passed as the `nextword` arguments.
-
-## Contributors
-
-- high-moctane ([https://github.com/high-moctane](https://github.com/high-moctane))
-- Rafael Bodill ([https://github.com/rafi](https://github.com/rafi))
-
-## License
-
-MIT
-
+Note: `args` is optional. it will be passed as the `mocword` arguments.
