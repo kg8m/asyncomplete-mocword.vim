@@ -4,10 +4,10 @@ asyncomplete-mocword.vim
 Provides intelligent English autocomplete for asyncomplete.vim via mocword.
 
 
-Screenshot
+Demo
 --------------------------------------------------
 
-FIXME
+https://user-images.githubusercontent.com/694547/165435588-8206f1ff-b02d-45e8-9340-93d7d77c9d58.mp4
 
 
 Installing
