@@ -4,7 +4,7 @@ augroup asyncomplete#sources#mocword#augroup
 augroup END
 
 function! asyncomplete#sources#mocword#get_source_options(opt) abort
-  if !exists('a:opt["args"]')
+  if !has_key(a:opt, "args")
     let a:opt["args"] = ["--limit", "100"]
   endif
 
