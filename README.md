@@ -33,4 +33,4 @@ call asyncomplete#register_source(asyncomplete#sources#mocword#get_source_option
 \ }))
 ```
 
-Note: `args` is optional. it will be passed as the `mocword` arguments.
+Note: `args` is optional. It will be passed as the `mocword` arguments.
