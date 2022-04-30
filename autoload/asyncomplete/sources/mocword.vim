@@ -11,7 +11,7 @@ function! asyncomplete#sources#mocword#get_source_options(opt) abort
   endif
 
   if !exists("s:mocword_job")
-    let s:mocword_job = async#job#start(["mocword"] + opt["args"], { "on_stdout": function("s:on_event") })
+    let s:mocword_job = asyncomplete#mocword#job#start(["mocword"] + opt["args"], { "on_stdout": function("s:on_event") })
 
     if s:mocword_job <= 0
       echoerr "mocword launch failed"
@@ -32,7 +32,7 @@ function! asyncomplete#sources#mocword#completor(opt, ctx) abort
   let s:ctx = a:ctx
   let s:opt = a:opt
 
-  call async#job#send(s:mocword_job, l:typed . "\n")
+  call asyncomplete#mocword#job#send(s:mocword_job, l:typed . "\n")
 endfunction
 
 function! s:get_typed_string(ctx)
@@ -65,7 +65,7 @@ endfunction
 
 function! s:stop_mocword()
   if exists("s:mocword_job") && s:mocword_job > 0
-    call async#job#stop(s:mocword_job)
+    call asyncomplete#mocword#job#stop(s:mocword_job)
   endif
 endfunction
 

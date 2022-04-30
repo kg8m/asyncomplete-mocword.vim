@@ -15,7 +15,6 @@ Installing
 
 ```
 Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/async.vim'
 Plug 'kg8m/asyncomplete-mocword.vim'
 ```
 
