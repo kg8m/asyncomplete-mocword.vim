@@ -56,7 +56,7 @@ function! s:on_event(job_id, data, event)
   let l:candidates = split(a:data[0], " ")
   let l:items = s:generate_items(l:candidates)
 
-  call asyncomplete#complete(s:opt["name"], s:ctx, l:startcol, l:items)
+  call asyncomplete#complete(s:opt["name"], s:ctx, l:startcol, l:items, 1)
 endfunction
 
 function! s:generate_items(candidates)
