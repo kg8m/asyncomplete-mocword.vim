@@ -9,9 +9,12 @@ function! asyncomplete#sources#mocword#get_source_options(opt) abort
   if !has_key(opt, "args")
     let opt["args"] = ["--limit", "100"]
   endif
+  return opt
+endfunction
 
+function! asyncomplete#sources#mocword#completor(opt, ctx) abort
   if !exists("s:mocword_job")
-    let s:mocword_job = asyncomplete#mocword#job#start(["mocword"] + opt["args"], { "on_stdout": function("s:on_event") })
+    let s:mocword_job = asyncomplete#mocword#job#start(["mocword"] + a:opt["args"], { "on_stdout": function("s:on_event") })
 
     if s:mocword_job <= 0
       echoerr "mocword launch failed"
@@ -20,10 +23,6 @@ function! asyncomplete#sources#mocword#get_source_options(opt) abort
     let s:ctx = {}
   endif
 
-  return opt
-endfunction
-
-function! asyncomplete#sources#mocword#completor(opt, ctx) abort
   if s:mocword_job <= 0
     return
   endif
